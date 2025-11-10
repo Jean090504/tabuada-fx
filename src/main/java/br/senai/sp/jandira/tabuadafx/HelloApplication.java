@@ -20,13 +20,13 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         //Definir tamanho da tela (stage)
-        stage.setWidth(600);
+        stage.setWidth(615);
         stage.setHeight(700);
 
         //Componente principal
         VBox root = new VBox();
         Scene scene = new Scene(root);
-        stage.setTitle("Tabuada");
+        stage.setTitle("Tabuada" );
 
         stage.setScene(scene);
         stage.show();
@@ -39,9 +39,11 @@ public class HelloApplication extends Application {
 
 
         Label labelTitulo = new Label("Tabuada");
-        labelTitulo.setStyle("-fx-text-fill: #fafafa; -fx-font-size: 24px; -fx-font-weight: Bold ");
+        labelTitulo.setStyle("-fx-text-fill: #fafafa; -fx-font-size: 24px; -fx-font-weight: Bold; -fx-alignment:center;");
+        labelTitulo.setMinWidth(550);
         Label labelSubtitulo = new Label("Construa tabuadas sem limites!");
-        labelSubtitulo.setStyle("-fx-text-fill: #fafafa; -fx-font-size: 14px;");
+        labelSubtitulo.setStyle("-fx-text-fill: #fafafa; -fx-font-size: 14px;  -fx-font-weight: Bold; -fx-alignment:center;");
+        labelSubtitulo.setMinWidth(550);
 
         header.getChildren().add(labelTitulo);
         header.getChildren().add(labelSubtitulo);
@@ -59,6 +61,9 @@ public class HelloApplication extends Application {
 
         Label labelMaiorMultiplicador = new Label("Maior Multiplicador");
         textFieldfMaiorMultiplicador = new TextField();
+        textFieldfMaiorMultiplicador.setMinHeight(30);
+        textFieldfMaiorMultiplicador.setMinWidth(400);
+
         labelMaiorMultiplicador.setStyle("-fx-text-fill: #000000; -fx-font-size: 14px; -fx-label-padding: 10px");
 
         gridFormulario.add(labelMultiplicando, 0, 0);
@@ -73,18 +78,21 @@ public class HelloApplication extends Application {
 
         Button btnCalcular = new Button("Calcular");
         btnCalcular.setStyle("");
+        btnCalcular.setMinWidth(200);
         btnCalcular.setOnAction(e -> {
             calcularTabuada();
         });
 
         Button btnLimpar = new Button("Limpar");
         btnLimpar.setStyle("");
+        btnLimpar.setMinWidth(200);
         btnLimpar.setOnAction(e -> {
             limparTabuada();
         });
 
         Button btnSair = new Button("Sair");
         btnSair.setStyle("");
+        btnSair.setMinWidth(200);
         btnSair.setOnAction(e -> {
             sairDaTabuada();
         });
