@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Optional;
 
 public class HelloApplication extends Application {
     TextField textFieldfMultiplicando;
@@ -79,13 +80,13 @@ public class HelloApplication extends Application {
         Button btnLimpar = new Button("Limpar");
         btnLimpar.setStyle("");
         btnLimpar.setOnAction(e -> {
-
+            limparTabuada();
         });
 
         Button btnSair = new Button("Sair");
         btnSair.setStyle("");
         btnSair.setOnAction(e -> {
-
+            sairDaTabuada();
         });
 
         //Adicionar os botões ba boxBotões
@@ -116,8 +117,13 @@ public class HelloApplication extends Application {
         int menorMultiplicador = Integer.parseInt(textFieldfMenorMultiplicador.getText());
         int maiorMultiplicador = Integer.parseInt(textFieldfMaiorMultiplicador.getText());
 
-        int tamanho = (maiorMultiplicador - menorMultiplicador) + 1;
+        if (menorMultiplicador > maiorMultiplicador) {
+            int auxiliar = menorMultiplicador;
+            menorMultiplicador = maiorMultiplicador;
+            maiorMultiplicador = auxiliar;
+        }
 
+        int tamanho = (maiorMultiplicador - menorMultiplicador) + 1;
         String[] tabuada = new String[tamanho];
 
         int contador = 0;
@@ -129,8 +135,38 @@ public class HelloApplication extends Application {
             contador++;
             menorMultiplicador++;
         }
-
+        listaTabuada.getItems().clear();
         listaTabuada.getItems().addAll(tabuada);
+
+    }
+
+    public void limparTabuada() {
+        // Limpa os campos de texto das notas e do nome
+        textFieldfMultiplicando.setText("");
+        textFieldfMenorMultiplicador.setText("");
+        textFieldfMaiorMultiplicador.setText("");
+
+        textFieldfMultiplicando.requestFocus();
+
+        listaTabuada.getItems().clear();
+
+    }
+
+    public void  sairDaTabuada() {
+        Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+        alerta.setTitle("Confirmar Saída");
+        alerta.setHeaderText("Deseja realmente fechar a aplicação?");
+        alerta.setContentText("Clique em 'OK' para sair ou 'Cancelar' para continuar.");
+
+        Optional<ButtonType> resultado = alerta.showAndWait();
+
+        if (resultado.get() == ButtonType.OK) {
+            System.exit(0);
+
+            Alert alerta2 = new Alert(Alert.AlertType.INFORMATION, "Até Logo");
+            alerta2.showAndWait();
+
+        }
 
     }
 }
