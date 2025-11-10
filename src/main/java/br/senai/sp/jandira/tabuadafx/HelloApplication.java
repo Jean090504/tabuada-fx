@@ -113,43 +113,50 @@ public class HelloApplication extends Application {
     }
 
     public void calcularTabuada() {
-        int multiplicando = Integer.parseInt(textFieldfMultiplicando.getText());
-        int menorMultiplicador = Integer.parseInt(textFieldfMenorMultiplicador.getText());
-        int maiorMultiplicador = Integer.parseInt(textFieldfMaiorMultiplicador.getText());
+        try {
+            int multiplicando = Integer.parseInt(textFieldfMultiplicando.getText());
+            int menorMultiplicador = Integer.parseInt(textFieldfMenorMultiplicador.getText());
+            int maiorMultiplicador = Integer.parseInt(textFieldfMaiorMultiplicador.getText());
 
-        if (menorMultiplicador > maiorMultiplicador) {
-            int auxiliar = menorMultiplicador;
-            menorMultiplicador = maiorMultiplicador;
-            maiorMultiplicador = auxiliar;
-        }
+            if (menorMultiplicador > maiorMultiplicador) {
+                int auxiliar = menorMultiplicador;
+                menorMultiplicador = maiorMultiplicador;
+                maiorMultiplicador = auxiliar;
+            }
 
-        int tamanho = (maiorMultiplicador - menorMultiplicador) + 1;
-        String[] tabuada = new String[tamanho];
+            int tamanho = (maiorMultiplicador - menorMultiplicador) + 1;
+            String[] tabuada = new String[tamanho];
 
-        int contador = 0;
-        while (contador < tabuada.length) {
-            int produto = multiplicando * menorMultiplicador;
+            int contador = 0;
+            while (contador < tabuada.length) {
+                int produto = multiplicando * menorMultiplicador;
 
-            tabuada[contador] = multiplicando + " x " + menorMultiplicador + " = " + produto;
+                tabuada[contador] = multiplicando + " x " + menorMultiplicador + " = " + produto;
 
-            contador++;
-            menorMultiplicador++;
-        }
-        listaTabuada.getItems().clear();
-        listaTabuada.getItems().addAll(tabuada);
+                contador++;
+                menorMultiplicador++;
+            }
+            listaTabuada.getItems().clear();
+            listaTabuada.getItems().addAll(tabuada);
 
+        } catch (NumberFormatException e) {
+
+        Alert alertaErro = new Alert(Alert.AlertType.ERROR);
+        alertaErro.setTitle("Erro de Entrada");
+        alertaErro.setHeaderText("Dados inválidos!");
+        alertaErro.setContentText("Por favor, verifique se todos os campos estão preenchidos apenas com números.");
+        alertaErro.showAndWait();
+    }
     }
 
     public void limparTabuada() {
-        // Limpa os campos de texto das notas e do nome
-        textFieldfMultiplicando.setText("");
-        textFieldfMenorMultiplicador.setText("");
-        textFieldfMaiorMultiplicador.setText("");
+            textFieldfMultiplicando.setText("");
+            textFieldfMenorMultiplicador.setText("");
+            textFieldfMaiorMultiplicador.setText("");
 
-        textFieldfMultiplicando.requestFocus();
+            textFieldfMultiplicando.requestFocus();
 
-        listaTabuada.getItems().clear();
-
+            listaTabuada.getItems().clear();
     }
 
     public void  sairDaTabuada() {
@@ -161,10 +168,12 @@ public class HelloApplication extends Application {
         Optional<ButtonType> resultado = alerta.showAndWait();
 
         if (resultado.get() == ButtonType.OK) {
-            System.exit(0);
-
-            Alert alerta2 = new Alert(Alert.AlertType.INFORMATION, "Até Logo");
+            Alert alerta2 = new Alert(Alert.AlertType.INFORMATION, "Até Logo!");
+            alerta2.setTitle("Saindo");
+            alerta2.setHeaderText(null); // Remove o cabeçalho
             alerta2.showAndWait();
+
+            System.exit(0);
 
         }
 
